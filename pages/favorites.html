@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Favourites – Book Explorer</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            cream: '#faf7f2',
+            ink: '#1a1a2e',
+            amber: '#e8a045',
+            muted: '#6b7280',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #faf7f2; }
+    .book-card:hover { transform: translateY(-4px); transition: transform 0.2s ease; }
+  </style>
+</head>
+
+<body class="text-ink min-h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <nav class="bg-ink text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
+    <a href="../index.html" class="font-heading text-2xl text-amber tracking-wide"> Book Explorer</a>
+    <ul class="hidden md:flex gap-8 font-body text-sm font-medium">
+      <li><a href="../index.html" class="hover:text-amber transition-colors">Home</a></li>
+      <li><a href="favorites.html" class="hover:text-amber transition-colors border-b-2 border-amber pb-0.5">Favorites</a></li>
+      <li><a href="about.html" class="hover:text-amber transition-colors">About</a></li>
+    </ul>
+    <button id="menu-btn" class="md:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden bg-ink text-white px-6 py-4 flex-col gap-4 font-body text-sm font-medium md:hidden">
+    <a href="../index.html" class="hover:text-amber transition-colors">Home</a>
+    <a href="favorites.html" class="hover:text-amber transition-colors">Favorites</a>
+    <a href="about.html" class="hover:text-amber transition-colors">About</a>
+  </div>
+
+  <!-- PAGE HEADER -->
+  <section class="bg-ink text-white py-12 px-6 text-center">
+    <h1 class="font-heading text-4xl md:text-5xl mb-3">
+      My <span class="text-amber">Favourites</span>
+    </h1>
+    <p class="text-gray-300 font-body">Books you've saved to read later.</p>
+  </section>
+
+  <!-- MAIN -->
+  <main class="flex-1 px-6 py-10 max-w-7xl mx-auto w-full">
+
+    <!-- Empty state -->
+    <div id="empty-state" class="hidden text-center py-20 text-muted font-body">
+      <p class="text-lg">No favourites yet! Go browse some books and add them here.</p>
+      <a href="../index.html" class="mt-6 inline-block bg-amber text-ink font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 transition-colors text-sm">
+        Browse Books
+      </a>
+    </div>
+
+    <!-- Favourites grid -->
+    <div
+      id="favorites-grid"
+      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"
+    >
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-gray-400 text-center py-6 font-body text-sm mt-auto">
+    <p>© 2025 Book Explorer · Built by Umutoni Nada</p>
+  </footer>
+
+  <script type="module" src="../js/favoritesPage.js"></script>
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
+    });
+  </script>
+</body>
+</html>
