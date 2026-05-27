@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About – Book Explorer</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body: ['Inter', 'sans-serif'],
+          },
+          colors: {
+            cream: '#faf7f2',
+            ink: '#1a1a2e',
+            amber: '#e8a045',
+            muted: '#6b7280',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #faf7f2; }
+  </style>
+</head>
+
+<body class="text-ink min-h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <nav class="bg-ink text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
+    <a href="../index.html" class="font-heading text-2xl text-amber tracking-wide">Book Explorer</a>
+    <ul class="hidden md:flex gap-8 font-body text-sm font-medium">
+      <li><a href="../index.html" class="hover:text-amber transition-colors">Home</a></li>
+      <li><a href="favorites.html" class="hover:text-amber transition-colors">Favorites</a></li>
+      <li><a href="about.html" class="hover:text-amber transition-colors border-b-2 border-amber pb-0.5">About</a></li>
+    </ul>
+    <button id="menu-btn" class="md:hidden focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <div id="mobile-menu" class="hidden bg-ink text-white px-6 py-4 flex-col gap-4 font-body text-sm font-medium md:hidden">
+    <a href="../index.html" class="hover:text-amber transition-colors">Home</a>
+    <a href="favorites.html" class="hover:text-amber transition-colors">Favorites</a>
+    <a href="about.html" class="hover:text-amber transition-colors">About</a>
+  </div>
+
+  <!-- HEADER -->
+  <section class="bg-ink text-white py-12 px-6 text-center">
+    <h1 class="font-heading text-4xl md:text-5xl mb-3">
+      About <span class="text-amber">Book Explorer</span>
+    </h1>
+  </section>
+
+  <!-- CONTENT -->
+  <main class="flex-1 px-6 py-12 max-w-3xl mx-auto w-full font-body">
+    <div class="bg-white rounded-2xl p-8 shadow-sm space-y-6">
+      <div>
+        <h2 class="font-heading text-2xl mb-2">What is Book Explorer?</h2>
+        <p class="text-muted leading-relaxed">
+         Book Explorer is a cozy web app that helps book lovers search and discover books using a free
+          <a href="https://openlibrary.org/developers/api" target="_blank" class="text-amber hover:underline">Open Library API</a>.
+          Browse a wide collection of titles, save your favourites, and keep track of books to read later.
+        </p>
+      </div>
+
+      <div>
+        <h2 class="font-heading text-2xl mb-2">How it works</h2>
+        <ul class="text-muted leading-relaxed list-disc list-inside space-y-1">
+          <li>Search for any book by title using the search bar on the home page.</li>
+          <li>Click <strong>Add to Favourites</strong> on any book card to save it.</li>
+          <li>Visit the <strong>Favourites</strong> page to see your saved books.</li>
+          <li>Your favourites are saved in your browser and available whenever you return.</li>
+        </ul>
+      </div>
+
+      <div>
+        <h2 class="font-heading text-2xl mb-2">Built With</h2>
+        <ul class="text-muted leading-relaxed list-disc list-inside space-y-1">
+    <li>HTML5 and Tailwind CSS for responsive design</li>
+    <li>JavaScript ES6 modules for interactive features</li>
+    <li>Open Library API for book data</li>
+    <li>localStorage to save user favourites</li>
+  </ul>
+</div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-gray-400 text-center py-6 font-body text-sm mt-auto">
+    <p>© 2025 Book Explorer · Built by Umutoni Nada</p>
+  </footer>
+
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      menu.classList.toggle('hidden');
+      menu.classList.toggle('flex');
+    });
+  </script>
+</body>
+</html>
