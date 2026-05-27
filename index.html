@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Explorer</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            heading: ['Playfair Display', 'serif'],
+            body:    ['Inter', 'sans-serif'],
+          },
+          colors: {
+            cream: '#faf7f2',
+            ink:   '#1a1a2e',
+            amber: '#e8a045',
+            muted: '#6b7280',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { font-family: 'Inter', sans-serif; background-color: #faf7f2; }
+
+    /* Autocomplete dropdown */
+    #suggestions {
+      position: absolute;
+      top: 100%;
+      left: 0; right: 0;
+      background: #fff;
+      border-radius: 0 0 12px 12px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+      z-index: 100;
+      overflow: hidden;
+      list-style: none;
+      margin: 0; padding: 0;
+    }
+    #suggestions li:last-child { border-bottom: none !important; }
+    #suggestions li:hover { background: #faf7f2; }
+  </style>
+</head>
+
+<body class="text-ink min-h-screen flex flex-col">
+
+  <!-- NAVBAR -->
+  <nav class="bg-ink text-white px-6 py-4 flex items-center justify-between sticky top-0 z-50 shadow-md">
+    <a href="index.html" class="font-heading text-2xl text-amber tracking-wide">Book Explorer</a>
+    <ul class="hidden md:flex gap-8 font-body text-sm font-medium">
+      <li><a href="index.html"            class="hover:text-amber transition-colors border-b-2 border-amber pb-0.5">Home</a></li>
+      <li><a href="pages/favorites.html"  class="hover:text-amber transition-colors">Favorites</a></li>
+      <li><a href="pages/about.html"      class="hover:text-amber transition-colors">About</a></li>
+    </ul>
+    <button id="menu-btn" class="md:hidden" aria-label="Toggle menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+  <div id="mobile-menu" class="hidden bg-ink text-white px-6 py-4 flex-col gap-4 font-body text-sm font-medium md:hidden">
+    <a href="index.html"           class="hover:text-amber">Home</a>
+    <a href="pages/favorites.html" class="hover:text-amber">Favorites</a>
+    <a href="pages/about.html"     class="hover:text-amber">About</a>
+  </div>
+
+  <!-- HERO -->
+  <section class="bg-ink text-white py-16 px-6 text-center">
+    <h1 class="font-heading text-4xl md:text-6xl mb-4 leading-tight">
+      Discover Your Next <span class="text-amber">Favourite Book</span>
+    </h1>
+    <p class="text-gray-300 text-lg max-w-xl mx-auto mb-8 font-body">
+      Search countless books, save your favourites, and explore new worlds.
+    </p>
+
+    <!-- Search bar -->
+    <div class="flex flex-col sm:flex-row gap-3 justify-center max-w-lg mx-auto">
+      <div class="relative flex-1">
+        <input
+          id="search-input"
+          type="text"
+          placeholder="Type a book title..."
+          autocomplete="off"
+          class="w-full px-5 py-3 rounded-lg text-ink font-body focus:outline-none focus:ring-2 focus:ring-amber text-sm"
+        />
+        <ul id="suggestions" class="hidden"></ul>
+      </div>
+      <button
+        id="search-btn"
+        class="bg-amber text-ink font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 transition-colors font-body text-sm"
+      >Search</button>
+    </div>
+  </section>
+
+  <!-- MAIN -->
+  <main class="flex-1 px-6 py-10 max-w-7xl mx-auto w-full">
+    <h2 class="font-heading text-2xl md:text-3xl mb-6 text-ink">Trending Books</h2>
+
+    <!-- Loading spinner -->
+    <div id="loading" class="flex justify-center items-center py-16 hidden">
+      <div class="w-10 h-10 border-4 border-amber border-t-transparent rounded-full animate-spin"></div>
+      <span class="ml-3 text-muted font-body text-sm">Loading books...</span>
+    </div>
+
+    <!-- No results -->
+    <div id="no-results" class="hidden text-center py-16 text-muted font-body">
+      <p class="text-lg">No books found. Try a different search!</p>
+    </div>
+
+    <div id="books-grid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-ink text-gray-400 text-center py-6 font-body text-sm mt-auto">
+    <p>© 2025 Book Explorer · Built by Umutoni Nada</p>
+  </footer>
+
+  <script type="module" src="js/main.js"></script>
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      const m = document.getElementById('mobile-menu');
+      m.classList.toggle('hidden');
+      m.classList.toggle('flex');
+    });
+  </script>
+</body>
+</html>
